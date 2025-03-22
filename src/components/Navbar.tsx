@@ -4,7 +4,7 @@ import SearchIcon from "./SearchIcon";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between p-8">
+    <div className="fixed inset-0 z-30 h-[165px] flex justify-between p-8 ">
       <div className="flex gap-10 items-center">
         <Image
           src="/white-logo-spiderman.png"

@@ -13,7 +13,7 @@ const SearchIcon = () => {
     >
       <g
         fill="#ffffff"
-        fill-rule="nonzero"
+        fillRule="nonzero"
         stroke="none"
         strokeWidth="1"
         strokeLinecap="butt"

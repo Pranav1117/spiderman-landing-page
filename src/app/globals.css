@@ -6,7 +6,11 @@ body {
   box-sizing: border-box;
   height: 100vh;
   width: 100vw;
-  /* background-image: url("/white-logo-spiderman.png");
-  background-size: cover;*/
-  background-color: black; 
+}
+
+.bg-custom {
+  background-image: url('/pink-logo-spiderman.png');
+  background-size: 70%;
+  background-position: 77% 30%;
+  background-repeat: no-repeat;
 }
