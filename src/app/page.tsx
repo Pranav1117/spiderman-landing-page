@@ -1,13 +1,36 @@
 "use client";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination, EffectCoverflow } from "swiper/modules";
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  EffectCoverflow,
+  Thumbs,
+} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Navbar from "@/components/Navbar";
+import { useEffect, useState } from "react";
+import gsap from "gsap";
 
 export default function Home() {
+  const [slide, setSlide] = useState(null);
+  const items = [
+    { number: "01", src: "/spiderman-mask.png", bg: "#2C78BF" },
+    { number: "02", src: "/spiderman-hand.png", bg: "#8c311c" },
+    { number: "03", src: "/spiderman-helmet.png", bg: "#2C78BF" },
+  ];
+
+  gsap.fromTo(
+    ".hand",
+    {
+      y: 1000,
+      ease:"elastic"
+    },
+    { y: 0 }
+  );
   return (
     <div>
       {/* Navbar container */}
@@ -36,18 +59,17 @@ export default function Home() {
         </div>
 
         <Swiper
-          creativeEffect={{
-            next: { translate: [100, 0, 0] },
-            prev: { translate: [-100, 0, 0] },
-          }}
           effect="coverflow"
-          slidesPerView={1} 
+          slidesPerView={1}
           loop={true}
-          // autoplay={{ delay: 2000 }}
           navigation={true}
-          pagination={{ clickable: true }} 
-          modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+          pagination={{ clickable: true }}
+          modules={[Navigation, Pagination, Autoplay, EffectCoverflow, Thumbs]}
           className="w-full h-screen"
+          // @ts-ignore
+          onSwiper={(swiper) => setSlide(swiper)}
+          thumbs={{ swiper: slide }}
+          initialSlide={1}
         >
           <SwiperSlide className="flex justify-center items-center bg-[#2C78BF] h-screen w-full bg-custom">
             <Image
@@ -58,13 +80,13 @@ export default function Home() {
               className="absolute -bottom-30 right-[23%]"
             />
           </SwiperSlide>
-          <SwiperSlide className="flex justify-center items-center bg-[#CF5F45] h-screen w-full bg-custom">
+          <SwiperSlide className="flex justify-center items-center bg-[#CF5F45] h-screen w-full bg-custom ">
             <Image
               src="/spiderman-hand.png"
               height={340}
               width={340}
               alt="item-preview"
-              className="absolute bottom-0 right-[31%] "
+              className="absolute bottom-0 right-[31%] hand"
             />
           </SwiperSlide>
           <SwiperSlide className="flex justify-center items-center bg-[#2C78BF] h-screen w-full bg-custom">
@@ -79,42 +101,33 @@ export default function Home() {
         </Swiper>
       </div>
 
-      {/* Mini carousel */}
-      {/* <div className="absolute bottom-20 left-[70%] ">
+      <div className="absolute bottom-10 right-30">
         <Swiper
+          className="swiper thumbs w-[280px] h-[180px]"
+          spaceBetween={10}
           slidesPerView={2}
-          navigation={true}
-          loop={true}
-          modules={[Navigation]}
-          className="bg-blue-300 mr-10 h-50 w-1npm00"
+          onSwiper={setSlide}
+          modules={[Thumbs]}
+          watchSlidesProgress
         >
-          <SwiperSlide>
-            {" "}
-            <Image
-              src="/spiderman-hand.png"
-              height={100}
-              width={100}
-              alt="hand-preview"
-            ></Image>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              src="/spiderman-hand.png"
-              height={100}
-              width={100}
-              alt="hand-preview"
-            ></Image>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              src="/spiderman-hand.png"
-              height={100}
-              width={100}
-              alt="hand-preview"
-            ></Image>
-          </SwiperSlide>
+          {items.map((item, index) => (
+            <SwiperSlide
+              key={index}
+              className={`flex gap-4 bg-[${item.bg}] bg-[##832e2c]`}
+            >
+              <div className="number text-white text-xl relative -top-5 text-center z-100">
+                {item.number}
+              </div>
+              <Image
+                src={item.src}
+                fill={true}
+                alt={`Thumbnail ${item.number}`}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
-      </div> */}
+        <hr className="mt-6" />
+      </div>
     </div>
   );
 }
