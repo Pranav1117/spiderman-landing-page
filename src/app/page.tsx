@@ -1,18 +1,19 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, EffectCoverflow, Thumbs } from "swiper/modules";
+import { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Navbar from "@/components/Navbar";
-import gsap from "gsap";
 
 export default function Home() {
-  const [slide, setSlide] = useState(null);
-  const handRef = useRef(null);
+  const [slide, setSlide] = useState<SwiperType | null>(null);
   const startingAnimationEle = useRef(null);
+  const handRef = useRef(null);
   const heroText = useRef(null);
 
   const items = [
