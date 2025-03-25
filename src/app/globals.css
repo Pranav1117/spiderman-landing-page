@@ -16,3 +16,12 @@ body {
   background-position: 77% 30%;
   background-repeat: no-repeat;
 }
+
+@media (max-width:768px) {
+  .bg-custom {
+    background-image: url("/pink-logo-spiderman.png");
+    background-size: 70%;
+    background-position: 50% 30%;
+    background-repeat: no-repeat;
+  }
+}

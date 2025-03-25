@@ -89,12 +89,16 @@ export default function Home() {
 
           <div
             ref={heroText}
-            className="absolute bottom-[25%] left-[17%] z-30 text-white opacity-0"
+            className="w-[300px] absolute top-[35%] left-1/2 -translate-y-1/2 -translate-x-1/2 md:left-[17%] md:translate-y-0 md:translate-x-0 z-30 text-white text-center md:text-start opacity-0"
           >
-            <h3 className="text-[4rem] font-bold">SPIDER</h3>
-            <h3 className="text-[4rem] font-bold -mt-8">MAN</h3>
+            <h3 className="text-3xl md:text-[4rem] font-bold">
+              SPIDER <span className="inline md:hidden ">MAN</span>
+            </h3>
+            <h3 className="hidden md:block text-3xl md:text-[4rem] font-bold md:-mt-2">
+              MAN
+            </h3>
             <div className="mb-4 ">SUPERHERO</div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center md:justify-start">
               <div className="p-2 bg-[#ffffff0f] h-10 w-10 rounded-full grid place-content-center">
                 FB
               </div>
@@ -124,19 +128,19 @@ export default function Home() {
                 loading="lazy"
                 ref={handRef}
                 src="/spiderman-hand.png"
-                height={340}
-                width={340}
+                height={window.innerWidth > 768 ? 340 : 280}
+                width={window.innerWidth > 768 ? 340 : 280}
                 alt="item-preview"
-                className="absolute bottom-0 right-[31%] opacity-0 hand"
+                className="absolute bottom-0 -left-10 md:bottom-0  md:left-[47%] opacity-0 hand"
               />
             </SwiperSlide>{" "}
             <SwiperSlide className="flex justify-center items-center bg-[#2C78BF] h-screen w-full bg-custom">
               <Image
                 src="/spiderman-mask.png"
-                height={650}
-                width={650}
+                height={window.innerWidth > 768 ? 650 : 410}
+                width={window.innerWidth > 768 ? 650 : 410}
                 alt="item-preview"
-                className="absolute -bottom-30 right-[23%]"
+                className="absolute bottom-0 -left-25 md:-bottom-30 md:left-[37%]"
               />
             </SwiperSlide>
             <SwiperSlide className="flex justify-center items-center bg-[#2d2d2d] h-screen w-full bg-custom">
@@ -151,10 +155,10 @@ export default function Home() {
           </Swiper>
         </div>
 
-        <div className="absolute bottom-10 right-30">
+        <div className="absolute bottom-5 right-5 md:bottom-10 md:right-30">
           <Swiper
             ref={startingAnimationEle}
-            className="swiper thumbs w-[280px] h-[180px] opacity-0"
+            className="swiper thumbs w-[200px] h-[120px] md:w-[280px] md:h-[180px] opacity-0"
             spaceBetween={10}
             slidesPerView={2}
             onSwiper={setSlide}
