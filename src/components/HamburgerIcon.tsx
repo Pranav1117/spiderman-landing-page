@@ -1,12 +1,25 @@
+import { useEffect, useState } from "react";
 
 const HamburgerIcon = () => {
+  const [size, setSize] = useState(20); // Default size for mobile
+
+  useEffect(() => {
+    const updateSize = () => {
+      setSize(window.innerWidth > 768 ? 30 : 20);
+    };
+
+    updateSize(); // Set initial size
+    window.addEventListener("resize", updateSize);
+
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
-      width= {`${window.innerWidth>768?30:20}`}
-      height= {`${window.innerWidth>768?30:20}`}
+      width={size}
+      height={size}
       viewBox="0,0,256,256"
       className="cursor-pointer"
     >

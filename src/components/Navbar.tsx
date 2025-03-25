@@ -1,15 +1,28 @@
 import Image from "next/image";
 import HamburgerIcon from "./HamburgerIcon";
 import SearchIcon from "./SearchIcon";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [size, setSize] = useState(20);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setSize(window.innerWidth > 768 ? 30 : 20);
+    };
+
+    updateSize(); // Set initial size
+    window.addEventListener("resize", updateSize);
+
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
   return (
     <div className="fixed inset-0 z-30 h-[135px] md:h-[165px] flex justify-between p-4 md:p-8 ">
       <div className="flex gap-6 md:gap-10 items-center">
         <Image
           src="/white-logo-spiderman.png"
-          height={window.innerWidth > 768 ? 80 : 50}
-          width={window.innerWidth > 768 ? 80 : 50}
+          height={size}
+          width={size}
           alt="spiderman-logo"
           className="cursor-pointer"
         />

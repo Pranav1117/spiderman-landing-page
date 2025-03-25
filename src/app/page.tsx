@@ -16,6 +16,11 @@ export default function Home() {
   const [slide, setSlide] = useState<SwiperType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const startingAnimationEle = useRef(null);
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0,
+  });
+
   const handRef = useRef(null);
   const heroText = useRef(null);
 
@@ -62,6 +67,21 @@ export default function Home() {
         filter: "blur(0px)",
       }
     );
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+    // Update on resize
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -128,8 +148,8 @@ export default function Home() {
                 loading="lazy"
                 ref={handRef}
                 src="/spiderman-hand.png"
-                height={window.innerWidth > 768 ? 340 : 280}
-                width={window.innerWidth > 768 ? 340 : 280}
+                height={windowSize.width > 768 ? 340 : 280}
+                width={windowSize.width > 768 ? 340 : 280}
                 alt="item-preview"
                 className="absolute bottom-0 -left-10 md:bottom-0  md:left-[47%] opacity-0 hand"
               />
@@ -137,8 +157,8 @@ export default function Home() {
             <SwiperSlide className="flex justify-center items-center bg-[#2C78BF] h-screen w-full bg-custom">
               <Image
                 src="/spiderman-mask.png"
-                height={window.innerWidth > 768 ? 650 : 410}
-                width={window.innerWidth > 768 ? 650 : 410}
+                height={windowSize.width > 768 ? 650 : 410}
+                width={windowSize.width > 768 ? 650 : 410}
                 alt="item-preview"
                 className="absolute bottom-0 -left-25 md:-bottom-30 md:left-[37%]"
               />
